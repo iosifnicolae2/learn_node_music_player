@@ -1,0 +1,27 @@
+{
+  "name": "learning-nodejs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "DEBUG=learning-nodejs:* nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*"
+    ],
+    "delay": "2500"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.5"
+  }
+}
