@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><% menu.title %></title>
+    <% include head %>
+  </head>
+  <body>
+    <h2><% menu.title %></h2>
+
+    <ul>
+      <% menu.menu_of_the_day.forEach(function(dish){ %>
+        <h3><%=dish.name %></h3>
+        <img src="<%=dish.image %>"></img>
+        <p><% dish.description %></p>
+        <p>Price: <%=dish.price %></p>
+        <p>Quantity: <%=dish.quantity %></p>
+      <% }); %>
+    </ul>
+
+    <% include scripts %>
+  </body>
+</html>
