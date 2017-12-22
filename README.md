@@ -6,5 +6,14 @@ Learn Node.js with an Express.js sample.
 
 ## How to start the project
 1. Run `npm install`
-2. Then start the project `npm start`
-3. Create another tab and run `npm install -g phantomjs` then `phantomjs pahtom_script.js`.
+2. Create a `.json` file in `ouput` folder.
+Example:
+```json
+{
+  "email": "email@student.unitbv.ro",
+  "password": "password"
+}
+```
+3. Update the menu with the following command `npm run update_menu`
+4. The above script must generate 3 more files in `output` directory: `login.png`, `meniu.html` and `meniu.png`.
+5. Now it's time to start the project `npm start`.
