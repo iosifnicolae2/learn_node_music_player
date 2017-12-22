@@ -1,4 +1,6 @@
 var express = require('express');
+
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,6 +10,24 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 
 var app = express();
+
+var modulul_meu = require('./modulul-meu.js');
+
+var functie = function(req, res, next) {
+  console.log(req.query)
+  res.json(
+    {
+      "nume": modulul_meu.nume,
+      "prenume": modulul_meu.prenume,
+      "nume_prenume": modulul_meu.nume + " " + modulul_meu.prenume,
+      "varsta": modulul_meu.varsta(2017),
+      "varsta_automata_ms": modulul_meu.varsta_automata_ms()
+    }
+  )
+}
+app.use('/test', functie);
+
+
 /*
   Express is a minimal and flexible Node.js web application framework
   that provides a robust set of features for web and mobile applications.
