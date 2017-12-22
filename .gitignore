@@ -60,3 +60,4 @@ typings/
 output/*
 !output/.gitkeep
 package-lock.json
+phantom_script.js
