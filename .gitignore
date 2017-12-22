@@ -59,3 +59,4 @@ typings/
 
 output/*
 !output/.gitkeep
+package-lock.json
