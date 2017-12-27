@@ -9,13 +9,26 @@ the one of module.exports from the included module.
 */
 var menu_of_the_day = require('../menu_of_the_day.js');
 
+
+
 /*
 GET home page.
 This method is used to process request to `/` path.
 When the user open the following page: http://localhost:3000 the above
 middleware is called.
 */
-
+router.get('/enable_menu/:id', function(req, res, next){
+    var id=req.params.id;
+    console.log("dish " + id + " enabled");
+    menu_of_the_day.menu_of_the_day[id].enabled=true;
+    res.redirect('/');
+});
+router.get('/disable_menu/:id', function(req, res, next){
+    var id=req.params.id;
+    console.log("dish " + id + " disabled");
+    menu_of_the_day.menu_of_the_day[id].enabled=false;
+    res.redirect('/');
+});
 router.get('/', function(req, res, next) {
   // Print in nodejs console `Meniul zilei` and the content of `menu_of_the_day` object
   console.log('Meniul zilei', menu_of_the_day)
@@ -48,6 +61,7 @@ setInterval(function() {
     console.log(menu_of_the_day)
   })
 }, 60 * 60 * 1000)
+
 
 
 router.get('/menu_of_the_day', function(req, res, next) {
