@@ -2,6 +2,7 @@ module.exports = {
   "title": "Meniul zilei",
   "menu_of_the_day" : [
     {
+      "id": '1',
       "enabled": false,
       "name": "Supa de pasare cu taitei",
       "image": "https://www.retetecalamama.ro/wp-content/uploads/2015/01/ciorba-ardeleneasca-de-varza-1.jpg",
@@ -10,6 +11,7 @@ module.exports = {
       "quantity": "200g"
     },
     {
+      "id": '2',
       "enabled": false,
       "name": "Mamaliga",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Mamaliga.jpg/440px-Mamaliga.jpg",
@@ -18,6 +20,7 @@ module.exports = {
       "quantity": "2000g"
     },
     {
+      "id": '3',
       "enabled": false,
       "name": "Sarmale",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Mamaliga.jpg/440px-Mamaliga.jpg",
@@ -26,6 +29,7 @@ module.exports = {
       "quantity": "2000g"
     },
     {
+      "id": '4',
       "enabled": false,
       "name": "Tocana",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Mamaliga.jpg/440px-Mamaliga.jpg",

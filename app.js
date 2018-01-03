@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var app = express();
 
 var modulul_meu = require('./modulul-meu.js');
+var menu_of_the_day=require('./menu_of_the_day.js');
 
 var functie = function(req, res, next) {
   console.log(req.query)
@@ -48,6 +49,33 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
+app.post('/enable', urlencodedParser, function(req, res, next){
+  var id=parseInt(req.body.activate);
+
+  if(id>=1&&id<=menu_of_the_day.menu_of_the_day.length){
+  res.redirect('/enable_menu/' + id);
+}else{
+  console.log('numar introdus gresit');
+  console.log(typeof(id));
+}
+});
+app.post('/disable', urlencodedParser, function(req, res, next){
+  console.log(req.body);
+  var id=parseInt(req.body.disable);
+  if(id>=1&&id<=menu_of_the_day.menu_of_the_day.length){
+  res.redirect('/disable_menu/' + id);
+}else{
+    console.log('Numar introdus gresit');
+}
+});
+
+app.post('/admin', urlencodedParser, function(req, res, next){
+  var id=req.body.admin;
+  res.redirect('/admin');
+});
 // The above line of code expose the content of `public` folder to the client
 // For example, when you make a request to http://localhost:3000/stylesheets/style.css
 // style.css file is served as response.

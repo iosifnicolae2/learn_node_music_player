@@ -9,8 +9,6 @@ the one of module.exports from the included module.
 */
 var menu_of_the_day = require('../menu_of_the_day.js');
 
-
-
 /*
 GET home page.
 This method is used to process request to `/` path.
@@ -19,15 +17,29 @@ middleware is called.
 */
 router.get('/enable_menu/:id', function(req, res, next){
     var id=req.params.id;
-    console.log("dish " + id + " enabled");
-    menu_of_the_day.menu_of_the_day[id].enabled=true;
+    var selected_dishes = [];
+    menu_of_the_day.menu_of_the_day.forEach(function(dish, index) {
+      if(dish.id === id) {
+        menu_of_the_day.menu_of_the_day[index].enabled = true;
+        selected_dishes.push(dish);
+      }
+    });
     res.redirect('/');
+    console.log("dishes enabled:", selected_dishes);
+
 });
 router.get('/disable_menu/:id', function(req, res, next){
     var id=req.params.id;
-    console.log("dish " + id + " disabled");
-    menu_of_the_day.menu_of_the_day[id].enabled=false;
-    res.redirect('/');
+    var unselected_dishes = [];
+    menu_of_the_day.menu_of_the_day.forEach(function(dish, index) {
+      if(dish.id === id) {
+        menu_of_the_day.menu_of_the_day[index].enabled = false;
+        unselected_dishes.push(dish);
+      }
+    });
+
+    console.log("dishes disabled:", unselected_dishes);
+    res.redirect("/");
 });
 router.get('/', function(req, res, next) {
   // Print in nodejs console `Meniul zilei` and the content of `menu_of_the_day` object
@@ -41,6 +53,11 @@ router.get('/', function(req, res, next) {
 
 });
 
+
+router.get('/admin', function(req, res, next) {
+  res.render('admin', menu_of_the_day);
+
+});
 // Update menu each hour
 setInterval(function() {
   extract_menu(function(menu) {

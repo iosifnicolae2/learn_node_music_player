@@ -7,9 +7,33 @@ a {
   color: #00B7FF;
 }
 
-.enable
-{
+p{
+   font-size: 2vw;
 
+}
+h3{
+  font-size: 3vw;
 
+}
+h2{
+  font-size: 5vw;
+}
+h4{
+  font-size: 1vw;
+}
+.button{
+
+  padding: 5px 5px 5px 5px;
+  background-color: orange;
+  width: 10%;
+  height: 5%;
+
+}
+.button:hover{
+
+  padding: 5px 5px 5px 5px;
+  background-color: yellow;
+  width: 10%;
+  height: 5%;
 
 }
