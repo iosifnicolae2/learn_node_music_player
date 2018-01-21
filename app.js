@@ -6,30 +6,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
 var client = require('./routes/client');
 
 var app = express();
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
-var modulul_meu = require('./modulul-meu.js');
-var menu_of_the_day=require('./menu_of_the_day.js');
-
-var functie = function(req, res, next) {
-  console.log(req.query)
-  res.json(
-    {
-      "nume": modulul_meu.nume,
-      "prenume": modulul_meu.prenume,
-      "nume_prenume": modulul_meu.nume + " " + modulul_meu.prenume,
-      "varsta": modulul_meu.varsta(2017),
-      "varsta_automata_ms": modulul_meu.varsta_automata_ms()
-    }
-  )
-}
-app.use('/test', functie);
 
 
 /*
@@ -56,30 +38,6 @@ app.use(cookieParser());
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
-app.post('/enable', urlencodedParser, function(req, res, next){
-  var id=parseInt(req.body.activate);
-
-  if(id>=1&&id<=menu_of_the_day.menu_of_the_day.length){
-  res.redirect('/enable_menu/' + id);
-}else{
-  console.log('numar introdus gresit');
-  console.log(typeof(id));
-}
-});
-app.post('/disable', urlencodedParser, function(req, res, next){
-  console.log(req.body);
-  var id=parseInt(req.body.disable);
-  if(id>=1&&id<=menu_of_the_day.menu_of_the_day.length){
-  res.redirect('/disable_menu/' + id);
-}else{
-    console.log('Numar introdus gresit');
-}
-});
-
-app.post('/admin', urlencodedParser, function(req, res, next){
-  var id=req.body.admin;
-  res.redirect('/admin');
-});
 // The above line of code expose the content of `public` folder to the client
 // For example, when you make a request to http://localhost:3000/stylesheets/style.css
 // style.css file is served as response.
@@ -87,9 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Register a router for `/` path
 // `index` is a module that expose an Express router.
-app.use('/', index);
-
-app.use('/client', client(io));
+app.use('/', client(io));
 
 
 // catch 404 and forward to error handler

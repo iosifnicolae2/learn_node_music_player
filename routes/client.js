@@ -1,13 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var extract_menu = require('../modules/extract_menu');
-
-/*
- Get menu of the day from a separate file
- When you include a file(or module) the value returned by require method is
-the one of module.exports from the included module.
-*/
-var menu_of_the_day = require('../menu_of_the_day.js');
 
 
 router.get('/', function(req, res, next) {
