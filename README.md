@@ -7,3 +7,8 @@ Learn Node.js with an Express.js sample.
 ## How to start the project
 1. Run `npm install`
 2. Now it's time to start the project `npm start`.
+
+cat > ~/.ngrok <<EOF
+server_addr: unitbv.iosif.mailo.ml:4443
+trust_host_root_certs: false
+EOF
