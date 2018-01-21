@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Remote control</title>
+    <style>
+      button {
+        margin: 10px 20px;
+        width: 117px;
+        height: 35px;
+        background: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="remote_control">
+      <button id="play">Play</button>
+      <button id="stop">Stop</button><br/>
+      <button id="prev">Previous</button>
+      <button id="next">Next</button><br/>
+      <button id="increase">Increase volume</button>
+      <button id="decrease">Decrease volume</button><br/>
+      <button id="backward">Backward</button>
+      <button id="forward">Forward</button>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script>
+    var socket = io();
+    function command(cmd) {
+      console.log("Trimit comanda", cmd);
+      socket.emit('audio_cmd', cmd);
+    }
+    document.getElementById("play").addEventListener("click", () => command('start'));
+    document.getElementById("stop").addEventListener("click", () => command('stop'));
+    document.getElementById("next").addEventListener("click", () => command('next_song'));
+    document.getElementById("prev").addEventListener("click", () => command('previous_song'));
+    document.getElementById("increase").addEventListener("click", () => command('increase_volume'));
+    document.getElementById("decrease").addEventListener("click", () => command('decrease_volume'));
+    document.getElementById("forward").addEventListener("click", () => command('forward'));
+    document.getElementById("backward").addEventListener("click", () => command('backward'));
+
+
+  </script>
+</html>

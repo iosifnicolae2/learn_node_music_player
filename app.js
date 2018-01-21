@@ -7,8 +7,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var client = require('./routes/client');
 
 var app = express();
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var modulul_meu = require('./modulul-meu.js');
 var menu_of_the_day=require('./menu_of_the_day.js');
@@ -85,6 +89,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // `index` is a module that expose an Express router.
 app.use('/', index);
 
+app.use('/client', client(io));
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found :)))))');
@@ -104,3 +111,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});

@@ -9,6 +9,7 @@ the one of module.exports from the included module.
 */
 var menu_of_the_day = require('../menu_of_the_day.js');
 
+
 /*
 GET home page.
 This method is used to process request to `/` path.

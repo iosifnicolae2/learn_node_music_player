@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Client page</title>
+  </head>
+  <body>
+      <h1> Client page</h1>
+      <h2 id="song_name"></h2>
+      <audio controls id="audio">
+          Your browser does not support the audio element.
+      </audio>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script>
+    var socket = io();
+    var audio = document.getElementById('audio');
+    var song_name = document.getElementById('song_name');
+    var audio_queue = [
+      {
+        name: "Song 1",
+        src: "http://localhost:3000/music/song1.mp3"
+      },
+      {
+        name: "Song 2",
+        src: "http://localhost:3000/music/song2.mp3"
+      },
+      {
+        name: "Song 3",
+        src: "http://localhost:3000/music/song3.mp3"
+      },
+      {
+        name: "Welcome",
+        src: "http://localhost:3000/audio.mp3"
+      },
+      {
+        name: "Song 4",
+        src: "http://localhost:3000/music/song4.mp3"
+      },
+      {
+        name: "Song 5",
+        src: "http://localhost:3000/music/song5.mp3"
+      }
+    ];
+    var current_song = 0;
+
+    socket.on('audio start', function(msg){
+
+      audio.src = audio_queue[current_song].src;
+      song_name.innerHTML = audio_queue[current_song].name;
+      console.log('play',  audio_queue[current_song]);
+      audio.play();
+    });
+    socket.on('audio stop', function(msg){
+        audio.pause();
+    });
+    socket.on('audio next_song', function(msg){
+      current_song++;
+      if(current_song > audio_queue.length - 1){
+        current_song = 0;
+      }
+      audio.src = audio_queue[current_song].src;
+      song_name.innerHTML = audio_queue[current_song].name;
+      console.log('play',  audio_queue[current_song]);
+      audio.play();
+    });
+    socket.on('audio previous_song', function(msg){
+      current_song--;
+      if(current_song < 0){
+        current_song = audio_queue.length - 1;
+      }
+      audio.src = audio_queue[current_song].src;
+      song_name.innerHTML = audio_queue[current_song].name;
+      console.log('play',  audio_queue[current_song]);
+      audio.play();
+    });
+    socket.on('audio increase_volume', function(msg){
+      if(audio.volume >= 1)
+       return;
+        audio.volume += 0.1;
+    });
+    socket.on('audio decrease_volume', function(msg){
+      if(audio.volume <= 0)
+       return;
+        audio.volume -= 0.1;
+    });
+    socket.on('audio forward', function(msg){
+      audio.currentTime += 5;
+    });
+    socket.on('audio backward', function(msg){
+      audio.currentTime -= 5;
+    });
+  </script>
+</html>
